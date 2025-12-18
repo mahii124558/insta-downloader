@@ -1,11 +1,15 @@
 function download() {
-  let url = document.getElementById("url").value;
-  if(url === "") {
-    alert("Paste Instagram link");
+  const url = document.getElementById("url").value.trim();
+  const result = document.getElementById("result");
+
+  if (!url) {
+    alert("Instagram link paste karo");
     return;
   }
 
-  let api = "https://saveig.app/api/ajaxSearch";
+  result.innerHTML = "⏳ Processing...";
+
+  const api = "https://igdownloader.app/api/ajaxSearch";
 
   fetch(api, {
     method: "POST",
@@ -14,9 +18,15 @@ function download() {
     },
     body: "q=" + encodeURIComponent(url)
   })
-  .then(res => res.text())
-  .then(data => {
-    document.getElementById("result").innerHTML =
-      "Download link generated (public content only)";
-  });
+    .then(res => res.json())
+    .then(data => {
+      if (!data || !data.data) {
+        result.innerHTML = "❌ Download link nahi mila";
+        return;
+      }
+      result.innerHTML = data.data;
+    })
+    .catch(() => {
+      result.innerHTML = "❌ Error, baad mein try karo";
+    });
 }
