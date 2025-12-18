@@ -30,3 +30,8 @@ function download() {
       result.innerHTML = "❌ Error, baad mein try karo";
     });
 }
+function tags() {
+  const k = document.getElementById("tag").value;
+  document.getElementById("tags").innerText =
+    "#" + k + " #instareels #viralreels #reelsindia #trendingreels";
+}
