@@ -6,8 +6,6 @@ function download() {
     return;
   }
 
-  // Redirect to trusted downloader
   const target = "https://snapinsta.app/?url=" + encodeURIComponent(url);
-
   window.open(target, "_blank");
 }
